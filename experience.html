@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience | Jessica Stubbs Data Analyst Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--black:#0c0c0c;--asphalt:#181818;--concrete:#2a2a2a;--paper:#e8e2d5;--bone:#c8c2b5;--muted:#6a6560;--yellow:#f0dc28;--red:#cc1a00;--red2:#ff2200;--white:#f4efe7;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--paper);font-family:'Special Elite',monospace;font-size:16px;line-height:1.7;overflow-x:hidden;cursor:crosshair;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");background-size:400px;pointer-events:none;z-index:9000;mix-blend-mode:overlay;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 2.5rem;background:var(--black);border-bottom:3px solid var(--yellow);}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--yellow);text-decoration:none;letter-spacing:0.08em;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);text-decoration:none;position:relative;transition:color 0.15s;}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--yellow);}
+    .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+    section{padding:6rem 2.5rem;position:relative;}
+    .section-inner{max-width:1100px;margin:0 auto;}
+    .stamp{display:inline-block;font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;border:2px solid var(--red);color:var(--red);padding:0.15rem 0.65rem;transform:rotate(-1.5deg);margin-bottom:1rem;}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);line-height:0.9;letter-spacing:0.03em;color:var(--white);margin-bottom:3rem;}
+    .section-title .outline{color:transparent;-webkit-text-stroke:2px var(--yellow);}
+    footer{background:var(--yellow);padding:1.4rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--black);letter-spacing:0.1em;}
+    footer span{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--black);letter-spacing:0.08em;text-transform:uppercase;}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.55s ease,transform 0.55s ease;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    #experience{background:var(--asphalt);padding-top:9rem;}
+    .exp-card{background:var(--black);border:3px solid #2a2a2a;padding:3rem;position:relative;transition:border-color 0.2s;}
+    .exp-card:hover{border-color:var(--yellow);}
+    .exp-card::before,.exp-card::after{content:'';position:absolute;width:55px;height:16px;background:rgba(240,220,40,0.3);transform:rotate(-35deg);}
+    .exp-card::before{top:-7px;left:20px;}
+    .exp-card::after{bottom:-7px;right:20px;}
+    .exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:0.5rem;}
+    .exp-role{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0.04em;color:var(--white);line-height:1;}
+    .exp-date{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--yellow);letter-spacing:0.1em;border:1px solid var(--yellow);padding:0.25rem 0.65rem;white-space:nowrap;}
+    .exp-company{font-family:'Permanent Marker',cursive;font-size:1.05rem;color:var(--red2);margin-bottom:0.25rem;}
+    .exp-location{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.8rem;}
+    .exp-desc{color:var(--bone);font-size:0.95rem;margin-bottom:1.5rem;border-left:3px solid var(--red);padding-left:1rem;font-style:italic;}
+    .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.7rem;}
+    .exp-bullets li{color:var(--bone);font-size:0.9rem;padding-left:1.5rem;position:relative;}
+    .exp-bullets li::before{content:'//';position:absolute;left:0;color:var(--yellow);font-family:'Space Mono',monospace;font-size:0.72rem;top:0.12em;}
+
+    @media(max-width:768px){nav{padding:0.8rem 1.5rem;}.nav-links{gap:1.5rem;}section{padding:4rem 1.5rem;}#experience{padding-top:7rem;}footer{flex-direction:column;text-align:center;}}
+    .nav-resume{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);background:var(--yellow);padding:0.35rem 0.9rem;text-decoration:none;transition:all 0.15s;white-space:nowrap;}
+    .nav-resume:hover{background:var(--white);}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">JESS.STUBBS</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html" class="active">Experience</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="jess-stubbs-resume.pdf" download class="nav-resume">↓ Resume</a>
+  </nav>
+
+  <section id="experience">
+    <div class="section-inner">
+      <div class="stamp">// Experience</div>
+      <h2 class="section-title">WHERE<br><span class="outline">I'VE BEEN</span></h2>
+      <div class="reveal">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role">Independent E-Commerce Founder</div>
+            <div class="exp-date">Sept 2017 to Jan 2025</div>
+          </div>
+          <div class="exp-company">Subculture Syndicate · Asteroid Bunny · Hippie Goth Stickers</div>
+          <div class="exp-location">Grantsville, UT &amp; Indianapolis, IN &nbsp;·&nbsp; 7 years 5 months</div>
+          <p class="exp-desc">Founded and operated 3 e-commerce businesses over 8 years: coordinating vendor events, managing inventory and fulfillment, and driving growth through data-informed marketing and customer behavior analysis.</p>
+          <ul class="exp-bullets">
+            <li>Coordinated 20+ quarterly vendor sales events, supporting 10–20 small businesses per event</li>
+            <li>Tracked recurring KPI reports including vendor participation, email open/click rates, storefront engagement, and audience growth using Shopify Analytics and Meta Business Suite</li>
+            <li>Used performance data and customer behavior analysis to guide campaign strategy across operational and marketing functions</li>
+            <li>Reached $9K gross sales and 3K Instagram followers at peak; managed inventory, fulfillment, and shipping logistics across all three businesses</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:2rem;">
+        <div class="stamp">// Education &amp; Certifications</div>
+        <div class="exp-card" style="margin-top:1rem;">
+          <div class="exp-header">
+            <div class="exp-role">Data Analytics Career Path</div>
+            <div class="exp-date">June 2025</div>
+          </div>
+          <div class="exp-company">Codecademy</div>
+          <div class="exp-location">Certificate · Online</div>
+          <p class="exp-desc">Completed a comprehensive data analytics curriculum covering Python, SQL, data visualization, statistical analysis, and real-world project work.</p>
+          <ul class="exp-bullets">
+            <li>Python for data analysis including Pandas, NumPy, Matplotlib, Seaborn, and SciPy</li>
+            <li>SQL for querying, aggregating, and manipulating relational databases</li>
+            <li>Statistical methods including hypothesis testing, correlation, and regression</li>
+            <li>Data visualization and storytelling for both technical and non-technical audiences</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">J.S.</span>
+    <span>© 2026 Jessica Stubbs. Built by hand.</span>
+    <span>Parowan, UT</span>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.07 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

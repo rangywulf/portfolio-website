@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spotify Music Trend Analysis | Jessica Stubbs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black:   #0c0c0c;
+      --asphalt: #181818;
+      --concrete:#2a2a2a;
+      --paper:   #e8e2d5;
+      --bone:    #c8c2b5;
+      --muted:   #6a6560;
+      --yellow:  #f0dc28;
+      --red:     #cc1a00;
+      --red2:    #ff2200;
+      --white:   #f4efe7;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--paper);
+      font-family: 'Special Elite', monospace;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+      background-size: 400px;
+      pointer-events: none;
+      z-index: 9000;
+      mix-blend-mode: overlay;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 2.5rem;
+      background: var(--black);
+      border-bottom: 3px solid var(--yellow);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      color: var(--yellow);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+    .nav-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bone);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--yellow); }
+
+    /* HERO */
+    .project-hero {
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .project-hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%;
+      height: 100%;
+      background: var(--asphalt);
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+    .spray {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .spray-red { width: 500px; height: 300px; background: rgba(204,26,0,0.12); top: -60px; right: 0; }
+    .project-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+    }
+    .stamp {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      border: 2px solid var(--red);
+      color: var(--red);
+      padding: 0.15rem 0.65rem;
+      transform: rotate(-1.5deg);
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .project-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--yellow);
+      display: block;
+    }
+    .project-meta-bar {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .meta-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-item span {
+      color: var(--yellow);
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    /* CONTENT */
+    .project-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 5rem;
+      align-items: start;
+    }
+    .project-main { display: flex; flex-direction: column; gap: 3.5rem; }
+
+    .block-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      border-bottom: 2px solid #252525;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .block-label .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--yellow);
+    }
+    .block-text {
+      color: var(--bone);
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+    .block-text p { margin-bottom: 1rem; }
+    .block-text strong { color: var(--white); }
+
+    .findings-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
+    .findings-list li {
+      color: var(--bone);
+      font-size: 0.95rem;
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.65;
+    }
+    .findings-list li::before {
+      content: '//';
+      position: absolute;
+      left: 0;
+      color: var(--yellow);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      top: 0.12em;
+    }
+
+    /* SIDEBAR */
+    .project-sidebar { display: flex; flex-direction: column; gap: 2rem; position: sticky; top: 6rem; }
+
+    .sidebar-card {
+      background: var(--asphalt);
+      border: 1px solid #2a2a2a;
+      padding: 1.5rem;
+    }
+    .sidebar-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.4rem;
+    }
+    .tool-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tool-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid #333;
+      color: var(--bone);
+      letter-spacing: 0.05em;
+    }
+    .project-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--bone);
+      padding: 0.75rem 1rem;
+      border: 1px solid #2a2a2a;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .project-link::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--yellow);
+      transform: scaleY(0);
+      transition: transform 0.2s;
+    }
+    .project-link:hover { border-color: var(--yellow); color: var(--yellow); }
+    .project-link:hover::before { transform: scaleY(1); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--yellow); }
+
+    footer {
+      background: var(--yellow);
+      padding: 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      color: var(--black);
+      letter-spacing: 0.1em;
+    }
+    footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--black);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .project-content { grid-template-columns: 1fr; gap: 3rem; }
+      .project-sidebar { position: static; }
+      nav { padding: 0.8rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">JESS.STUBBS</a>
+    <a href="../projects.html" class="nav-back">← Back to Projects</a>
+  </nav>
+
+  <div class="project-hero">
+    <div class="spray spray-red"></div>
+    <div class="project-hero-inner">
+      <div class="stamp">// Data Analysis · Feb 2026</div>
+      <h1 class="project-title">
+        SPOTIFY MUSIC
+        <span class="outline">TREND ANALYSIS</span>
+      </h1>
+      <div class="project-meta-bar">
+        <div class="meta-item"><span>Date</span>February 2026</div>
+        <div class="meta-item"><span>Type</span>Ad Hoc Analysis</div>
+        <div class="meta-item"><span>Client</span>Record Label (Simulated)</div>
+        <div class="meta-item"><span>Dataset</span>114,000+ Spotify Tracks</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <div class="project-main">
+
+      <div class="section-block">
+        <div class="block-label">The <span class="outline">Brief</span></div>
+        <div class="block-text">
+          <p>A mid-size record label needed to identify which music genres to prioritize for next quarter signings. <strong>No internal data was available</strong> to guide the decision — so we built the answer from scratch using 114K+ Spotify tracks from Kaggle.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">The <span class="outline">Challenge</span></div>
+        <ul class="findings-list">
+          <li>How do we identify winning genres objectively?</li>
+          <li>Which genres are overvalued vs. underestimated?</li>
+          <li>What's the relationship between track characteristics and popularity?</li>
+          <li>Can we reduce risk by understanding current market trends?</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">My <span class="outline">Approach</span></div>
+        <div class="block-text">
+          <p><strong>Phase 1: Hypothesis Formation.</strong> Defined 5 assumptions before touching the data — expected pop and hip-hop to dominate, shorter songs to win, high energy to equal popularity. Writing these out first prevents confirmation bias.</p>
+          <p><strong>Phase 2: Data Preparation.</strong> Sourced 114K Spotify tracks, removed 16K zero-popularity tracks and 1 row with missing data. Result: 97,980 quality tracks across 114 genres.</p>
+          <p><strong>Phase 3: Rigorous Testing.</strong> Tested each assumption against real data — correlations, distributions, segment comparisons. Documented what worked and what didn't.</p>
+          <p><strong>Phase 4: Visualization.</strong> Created 3 simple, clear charts — not dashboards. Each tells one story in under 5 seconds. Ready for stakeholder presentation.</p>
+          <p><strong>Phase 5: Strategy.</strong> Built a tier-based recommendation system with caveats, limitations, and outlined next steps for validation.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Key <span class="outline">Findings</span></div>
+        <ul class="findings-list">
+          <li><strong>Electronic music outperforms expectations.</strong> Electro (57.9), house (57.2), and EDM (54.9) all beat hip-hop (53.1). Electronic and dance are underestimated in most label strategies.</li>
+          <li><strong>Medium energy beats high energy.</strong> Medium energy tracks average 40.8 vs. 37.9 for high energy. Balance matters more than intensity.</li>
+          <li><strong>Duration is a weak signal.</strong> Yes, 3-4 minutes is optimal (41.1 avg) — but the correlation is only −0.052. It's a constraint, not a guarantee. Quality beats timing.</li>
+          <li><strong>Pop still wins.</strong> Pop-film (59.4), k-pop (59.2), and pop (58.2) top the charts — consistent across samples. Safe bet, but faces the most competition.</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Recommended <span class="outline">Allocation</span></div>
+        <ul class="findings-list">
+          <li><strong>40% Tier 1 — Safe bets:</strong> Pop, k-pop, electro, house</li>
+          <li><strong>40% Tier 2 — Growth:</strong> EDM, indie, hip-hop, chill</li>
+          <li><strong>20% Tier 3 — Experimental:</strong> Soul, grunge, alt-rock</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Limitations I <span class="outline">Flagged</span></div>
+        <div class="block-text">
+          <p>I deliberately didn't overstate the findings. What this analysis can't tell you: revenue impact (popularity is not profit), cost to sign artists, audience demographics, or whether these trends will persist. <strong>Caveats build trust.</strong> This is why the analysis includes next steps — validate with internal data before making major budget decisions.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">What I <span class="outline">Learned</span></div>
+        <ul class="findings-list">
+          <li>Assumptions written before analysis prevent confirmation bias — it's more rigorous than "let's explore the data"</li>
+          <li>97K clean records beats 114K messy ones every time</li>
+          <li>Showing that audio features DON'T matter is just as valuable as finding ones that do</li>
+          <li>Admitting limitations makes recommendations stronger, not weaker</li>
+          <li>Same data yields different insights depending on the business context</li>
+        </ul>
+      </div>
+
+      <a href="../projects.html" class="back-link">← Back to all projects</a>
+
+    </div>
+
+    <aside class="project-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Tools Used</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">Pandas</span>
+          <span class="tool-tag">NumPy</span>
+          <span class="tool-tag">Matplotlib</span>
+          <span class="tool-tag">Seaborn</span>
+          <span class="tool-tag">Jupyter Notebook</span>
+          <span class="tool-tag">Git / GitHub</span>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Deliverables</div>
+        <div class="tool-tags">
+          <span class="tool-tag">5 Jupyter Notebooks</span>
+          <span class="tool-tag">97,980 Clean Records</span>
+          <span class="tool-tag">3 Presentation Charts</span>
+          <span class="tool-tag">Executive Recommendations</span>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Links</div>
+        <div class="project-links">
+          <a href="https://github.com/rangywulf" target="_blank" class="project-link">
+            {} View on GitHub
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <span class="footer-logo">J.S.</span>
+    <span>© 2026 Jessica Stubbs. Built by hand.</span>
+    <span>Parowan, UT</span>
+  </footer>
+
+</body>
+</html>
