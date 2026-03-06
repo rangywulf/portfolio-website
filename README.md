@@ -5,7 +5,7 @@ Professional portfolio website showcasing my work as a Data Analyst.
 ---
 
 ## Folder Structure
-
+```bash
 portfolio-website/
 ├─ index.html
 ├─ about.html
@@ -23,7 +23,7 @@ portfolio-website/
 │     └─ project2.png
 └─ styles/
    └─ main.css
-
+```
 ---
 
 ## Pages
