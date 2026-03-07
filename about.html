@@ -4,31 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About | Jessica Stubbs Data Analyst Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
   <style>
-    :root{--black:#0c0c0c;--asphalt:#181818;--concrete:#2a2a2a;--paper:#e8e2d5;--bone:#c8c2b5;--muted:#6a6560;--yellow:#f0dc28;--red:#cc1a00;--red2:#ff2200;--white:#f4efe7;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--black);color:var(--paper);font-family:'Special Elite',monospace;font-size:16px;line-height:1.7;overflow-x:hidden;cursor:crosshair;}
-    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");background-size:400px;pointer-events:none;z-index:9000;mix-blend-mode:overlay;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 2.5rem;background:var(--black);border-bottom:3px solid var(--yellow);}
-    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--yellow);text-decoration:none;letter-spacing:0.08em;}
-    .nav-links{display:flex;gap:2.5rem;list-style:none;}
-    .nav-links a{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);text-decoration:none;position:relative;transition:color 0.15s;}
-    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform 0.2s;}
-    .nav-links a:hover,.nav-links a.active{color:var(--yellow);}
-    .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
-    section{padding:6rem 2.5rem;position:relative;}
-    .section-inner{max-width:1100px;margin:0 auto;}
-    .stamp{display:inline-block;font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;border:2px solid var(--red);color:var(--red);padding:0.15rem 0.65rem;transform:rotate(-1.5deg);margin-bottom:1rem;}
-    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);line-height:0.9;letter-spacing:0.03em;color:var(--white);margin-bottom:3rem;}
-    .section-title .outline{color:transparent;-webkit-text-stroke:2px var(--yellow);}
-    footer{background:var(--yellow);padding:1.4rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--black);letter-spacing:0.1em;}
-    footer span{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--black);letter-spacing:0.08em;text-transform:uppercase;}
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.55s ease,transform 0.55s ease;}
-    .reveal.visible{opacity:1;transform:none;}
-
     #about{background:var(--asphalt);padding-top:9rem;}
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
     .about-left p{color:var(--bone);margin-bottom:1.3rem;font-size:0.98rem;}
@@ -39,20 +16,13 @@
     .skill-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
     .tag{font-family:'Space Mono',monospace;font-size:0.65rem;padding:0.22rem 0.6rem;background:var(--concrete);color:var(--bone);border:1px solid #3a3a3a;letter-spacing:0.05em;transition:all 0.15s;}
     .tag:hover{background:var(--yellow);color:var(--black);border-color:var(--yellow);}
-
-    @media(max-width:768px){nav{padding:0.8rem 1.5rem;}.nav-links{gap:1.5rem;}section{padding:4rem 1.5rem;}#about{padding-top:7rem;}.about-grid{grid-template-columns:1fr;gap:2.5rem;}footer{flex-direction:column;text-align:center;}}
+    @media(max-width:768px){#about{padding-top:7rem;}.about-grid{grid-template-columns:1fr;gap:2.5rem;}}
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html" class="nav-logo">JESS.STUBBS</a>
-    <ul class="nav-links">
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+
+  <div id="nav-placeholder"></div>
+  <script src="nav.js"></script>
 
   <section id="about">
     <div class="section-inner">
@@ -99,7 +69,7 @@
           </div>
         </div>
       </div>
-      <span class="scrawl" style="font-size: 48px;";>// without data, it's just an opinion.</span>
+      <span class="scrawl" style="font-size:48px;">// without data, it's just an opinion.</span>
     </div>
   </section>
 
