@@ -47,7 +47,7 @@ your-site/
 
 No build tools, no frameworks. Open `index.html` in a browser and it runs.
 
-Shared navigation is injected via `nav.js` — to update the nav across all pages, edit that one file. Shared styles live in `styles.css`.
+Shared navigation and footer are injected via `nav.js` — to update either across all pages, edit that one file. Shared styles live in `styles.css`.
 
 ---
 
@@ -58,6 +58,14 @@ Shared navigation is injected via `nav.js` — to update the nav across all page
 - **Biodiversity and Conservation Analysis** — Python, SciPy, Jupyter
 - **Exploring Life Expectancy and GDP** — Python, Pandas, Matplotlib
 - **Meal Planner: Google Sheets + Apps Script** — JavaScript, Apps Script
+
+---
+
+## A note on AI
+
+This site was built in collaboration with Claude (Anthropic).
+The AI assisted with code generation, refactoring, and debugging.
+All content, design decisions, and project work are my own.
 
 ---
 
