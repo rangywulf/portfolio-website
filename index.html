@@ -22,8 +22,15 @@
     .nav-links{display:flex;gap:2.5rem;list-style:none;}
     .nav-links a{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);text-decoration:none;position:relative;transition:color 0.15s;}
     .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform 0.2s;}
-    .nav-links a:hover{color:var(--yellow);}
-    .nav-links a:hover::after{transform:scaleX(1);}
+    .nav-links a:hover,.nav-links a.active{color:var(--yellow);}
+    .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+    .nav-resume{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);background:var(--yellow);padding:0.35rem 0.9rem;text-decoration:none;transition:all 0.15s;white-space:nowrap;}
+    .nav-resume:hover{background:var(--white);}
+    .nav-right{display:flex;align-items:center;gap:1rem;}
+    .nav-social{display:flex;align-items:center;gap:0.6rem;}
+    .nav-social a{color:var(--muted);transition:color 0.15s;display:flex;align-items:center;}
+    .nav-social a:hover{color:var(--yellow);}
+    .nav-social svg{width:18px;height:18px;fill:currentColor;}
 
     /* HERO */
     #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:stretch;padding:5rem 2.5rem 3rem;position:relative;overflow:hidden;background:var(--black);}
@@ -90,26 +97,16 @@
       .hero-nav{grid-template-columns:1fr;max-width:100%;}
       footer{flex-direction:column;text-align:center;}
     }
-    .nav-resume{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);background:var(--yellow);padding:0.35rem 0.9rem;text-decoration:none;transition:all 0.15s;white-space:nowrap;}
-    .nav-resume:hover{background:var(--white);}
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="nav-logo">JESS.STUBBS</a>
-    <ul class="nav-links">
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <a href="jess-stubbs-resume.pdf" download class="nav-resume">↓ Resume</a>
-  </nav>
+  <div id="nav-placeholder"></div>
+  <script src="nav.js"></script>
 
   <section id="hero">
     <div class="hero-photo-wrap">
-      <img src="../images/me_photo.jpg" alt="Jess Stubbs" class="hero-photo"/>
+      <img src="me_photo.jpg" alt="Jess Stubbs" class="hero-photo"/>
     </div>
     <div class="spray spray-red"></div>
     <div class="spray spray-yel"></div>
