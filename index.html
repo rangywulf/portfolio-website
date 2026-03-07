@@ -4,60 +4,188 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jessica Stubbs | Data Analyst Portfolio</title>
+
+  <!-- Shared styles: fonts, reset, nav, footer, section layout, animations -->
   <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Page-specific styles: hero section only -->
   <style>
-    /* HERO */
-    #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:stretch;padding:5rem 2.5rem 3rem;position:relative;overflow:hidden;background:var(--black);}
-    .hero-inner{position:relative;z-index:2;}
-    .hero-left{position:relative;z-index:2;}
-    .hero-badge{display:inline-block;background:var(--red);color:var(--white);font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;padding:0.22rem 0.7rem;margin-bottom:0.5rem;transform:rotate(-1deg);}
-    .hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,7.5vw,8.5rem);line-height:0.9;letter-spacing:0.02em;color:var(--white);}
-    .hero-name .outline{color:transparent;-webkit-text-stroke:2px var(--yellow);display:block;}
-    .hero-title{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--yellow);margin-top:0.6rem;padding-left:1rem;border-left:3px solid var(--red);}
-    .hero-tagline{max-width:480px;margin-top:0.5rem;color:var(--bone);font-size:0.85rem;line-height:1.5;}
-    .hero-photo-wrap{position:absolute;top:0;right:0;width:50%;height:100%;z-index:1;overflow:hidden;}
-    .hero-photo-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(to right, var(--black) 0%, rgba(12,12,12,0.5) 30%, transparent 60%);z-index:2;}
-    .hero-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, var(--black) 0%, transparent 20%);z-index:2;}
-    .hero-photo{width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:contrast(1.2) brightness(0.65) grayscale(1);display:block;}
-    .hero-nav{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.8rem;max-width:500px;}
-    .hero-nav-btn{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.12em;padding:0.7rem 1.2rem;text-decoration:none;display:flex;align-items:center;justify-content:space-between;transition:all 0.15s;}
-    .hero-nav-btn .arrow{font-size:1rem;transition:transform 0.15s;}
-    .hero-nav-btn:hover .arrow{transform:translate(3px,-3px);}
-    .btn-about{background:var(--yellow);color:var(--black);border:3px solid var(--yellow);}
-    .btn-about:hover{background:transparent;color:var(--yellow);transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--yellow);}
-    .btn-projects{background:transparent;color:var(--white);border:3px solid var(--white);}
-    .btn-projects:hover{background:var(--white);color:var(--black);transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--white);}
-    .btn-experience{background:transparent;color:var(--red2);border:3px solid var(--red2);}
-    .btn-experience:hover{background:var(--red2);color:var(--white);transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--red2);}
-    .btn-contact{background:var(--asphalt);color:var(--yellow);border:3px solid #333;}
-    .btn-contact:hover{border-color:var(--yellow);transform:translate(-3px,-3px);box-shadow:5px 5px 0 #333;}
-    .ribbon{position:absolute;bottom:0;left:0;right:0;background:var(--yellow);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:0.95rem;letter-spacing:0.22em;padding:0.45rem 0;overflow:hidden;white-space:nowrap;z-index:3;}
-    .ribbon-inner{display:inline-block;animation:marquee 22s linear infinite;}
-    @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-    @media(min-width:1024px){
-      #hero{height:100vh;min-height:0;justify-content:stretch;}
-      .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:100%;width:100%;flex:1;}
-      .hero-name{font-size:clamp(5rem,9vw,10rem);}
-      .hero-tagline{font-size:1rem;margin-top:0.8rem;}
-      .hero-nav{margin-top:1.5rem;max-width:100%;grid-template-columns:1fr 1fr;gap:0.8rem;}
-      .hero-nav-btn{font-size:1.6rem;padding:1.2rem 1.8rem;}
+    /* ── Hero: full viewport, content centered vertically ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      padding: 5rem 2.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
     }
-    @media(max-width:768px){
-      #hero{padding:8rem 1.5rem 4rem;}
-      .hero-photo-wrap{display:none;}
-      .hero-nav{grid-template-columns:1fr;max-width:100%;}
+    .hero-inner { position: relative; z-index: 2; }
+    .hero-left  { position: relative; z-index: 2; }
+
+    /* Small red badge above name */
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      margin-bottom: 0.5rem;
+      transform: rotate(-1deg);
+    }
+
+    /* Large display name — solid white + yellow outline variant */
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 7.5vw, 8.5rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--white);
+    }
+    .hero-name .outline { color: transparent; -webkit-text-stroke: 2px var(--yellow); display: block; }
+
+    /* Role subtitle with red left border */
+    .hero-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-top: 0.6rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--red);
+    }
+
+    /* Short pitch line */
+    .hero-tagline { max-width: 480px; margin-top: 0.5rem; color: var(--bone); font-size: 0.85rem; line-height: 1.5; }
+
+    /* ── Photo: right half of hero, fades out left and bottom ── */
+    .hero-photo-wrap {
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%; height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    /* Left fade gradient */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--black) 0%, rgba(12,12,12,0.5) 30%, transparent 60%);
+      z-index: 2;
+    }
+    /* Bottom fade gradient */
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--black) 0%, transparent 20%);
+      z-index: 2;
+    }
+    .hero-photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: contrast(1.2) brightness(0.65) grayscale(1);
+      display: block;
+    }
+
+    /* ── 4 CTA navigation buttons ── */
+    .hero-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      max-width: 500px;
+    }
+    .hero-nav-btn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+      padding: 0.7rem 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s;
+    }
+    .hero-nav-btn .arrow { font-size: 1rem; transition: transform 0.15s; }
+    .hero-nav-btn:hover .arrow { transform: translate(3px, -3px); }
+
+    /* Button variants */
+    .btn-about     { background: var(--yellow); color: var(--black); border: 3px solid var(--yellow); }
+    .btn-about:hover { background: transparent; color: var(--yellow); transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--yellow); }
+    .btn-projects  { background: transparent; color: var(--white); border: 3px solid var(--white); }
+    .btn-projects:hover { background: var(--white); color: var(--black); transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--white); }
+    .btn-experience { background: transparent; color: var(--red2); border: 3px solid var(--red2); }
+    .btn-experience:hover { background: var(--red2); color: var(--white); transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--red2); }
+    .btn-contact   { background: var(--asphalt); color: var(--yellow); border: 3px solid #333; }
+    .btn-contact:hover { border-color: var(--yellow); transform: translate(-3px,-3px); box-shadow: 5px 5px 0 #333; }
+
+    /* ── Scrolling marquee ribbon at bottom of hero ── */
+    .ribbon {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      padding: 0.45rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      z-index: 3;
+    }
+    /* Text duplicated inside so the loop is seamless */
+    .ribbon-inner { display: inline-block; animation: marquee 22s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── Wide layout (≥1024px): two-column hero ── */
+    @media (min-width: 1024px) {
+      #hero { height: 100vh; min-height: 0; justify-content: stretch; }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        max-width: 100%;
+        width: 100%;
+        flex: 1;
+      }
+      .hero-name    { font-size: clamp(5rem, 9vw, 10rem); }
+      .hero-tagline { font-size: 1rem; margin-top: 0.8rem; }
+      .hero-nav     { margin-top: 1.5rem; max-width: 100%; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .hero-nav-btn { font-size: 1.6rem; padding: 1.2rem 1.8rem; }
+    }
+
+    /* ── Mobile: hide photo, stack buttons ── */
+    @media (max-width: 768px) {
+      #hero { padding: 8rem 1.5rem 4rem; }
+      .hero-photo-wrap { display: none; }
+      .hero-nav { grid-template-columns: 1fr; max-width: 100%; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Nav injected by nav.js into this placeholder -->
   <div id="nav-placeholder"></div>
   <script src="nav.js"></script>
 
   <section id="hero">
+
+    <!-- Grayscale photo fades into black on left and bottom -->
     <div class="hero-photo-wrap">
       <img src="images/me_photo.jpg" alt="Jess Stubbs" class="hero-photo"/>
     </div>
+
+    <!-- Background spray blobs (styles in styles.css) -->
     <div class="spray spray-red"></div>
     <div class="spray spray-yel"></div>
 
@@ -70,16 +198,19 @@
         </h1>
         <p class="hero-title">Data Analyst &nbsp;/&nbsp; BI Analyst &nbsp;/&nbsp; E-commerce Analyst</p>
         <p class="hero-tagline">8 years running e-commerce businesses taught me what data actually costs when you get it wrong. Now I have the technical skills to get it right.</p>
+
+        <!-- 4 nav buttons: About, Projects, Experience, Contact -->
         <div class="hero-nav">
-          <a href="about.html" class="hero-nav-btn btn-about">About Me <span class="arrow">↗</span></a>
-          <a href="projects.html" class="hero-nav-btn btn-projects">Projects <span class="arrow">↗</span></a>
+          <a href="about.html"      class="hero-nav-btn btn-about">About Me    <span class="arrow">↗</span></a>
+          <a href="projects.html"   class="hero-nav-btn btn-projects">Projects  <span class="arrow">↗</span></a>
           <a href="experience.html" class="hero-nav-btn btn-experience">Experience <span class="arrow">↗</span></a>
-          <a href="contact.html" class="hero-nav-btn btn-contact">Contact <span class="arrow">↗</span></a>
+          <a href="contact.html"    class="hero-nav-btn btn-contact">Contact    <span class="arrow">↗</span></a>
         </div>
       </div>
       <div class="hero-right"></div>
     </div>
 
+    <!-- Scrolling keyword ribbon — text duplicated to create seamless loop -->
     <div class="ribbon">
       <span class="ribbon-inner">
         DATA ANALYST &nbsp;★&nbsp; PYTHON &nbsp;★&nbsp; SQL &nbsp;★&nbsp; TABLEAU &nbsp;★&nbsp;
@@ -92,12 +223,10 @@
     </div>
   </section>
 
-  <footer>
-    <span class="footer-logo">J.S.</span>
-    <span>© 2026 Jessica Stubbs. Built by hand.</span>
-    <span>Parowan, UT</span>
-  </footer>
+  <!-- Footer injected by nav.js into this placeholder -->
+  <div id="footer-placeholder"></div>
 
+  <!-- Reveal animation: adds .visible class when element scrolls into view -->
   <script>
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(entries => {

@@ -34,5 +34,18 @@
     </div>
   </nav>`;
 
+  const footerHTML = `
+  <footer>
+    <span class="footer-logo">J.S.</span>
+    <span>© 2026 Jess Stubbs. Built by hand.</span>
+    <span>jxdata.me</span>
+  </footer>`;
+
   document.getElementById('nav-placeholder').innerHTML = navHTML;
+
+  // Footer is at the bottom of the DOM — wait for it to exist before injecting
+  document.addEventListener('DOMContentLoaded', function() {
+    const footerEl = document.getElementById('footer-placeholder');
+    if (footerEl) footerEl.innerHTML = footerHTML;
+  });
 })();

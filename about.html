@@ -4,36 +4,87 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About | Jessica Stubbs Data Analyst Portfolio</title>
+
+  <!-- Shared styles: fonts, reset, nav, footer, section layout, animations -->
   <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Page-specific styles: about grid, skills sidebar, scrawl quote -->
   <style>
-    #about{background:var(--asphalt);padding-top:9rem;}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
-    .about-left p{color:var(--bone);margin-bottom:1.3rem;font-size:0.98rem;}
-    .about-left strong{color:var(--white);}
-    .scrawl{font-family:'Permanent Marker',cursive;font-size:1rem;color:var(--yellow);display:block;margin-top:1.5rem;transform:rotate(-1.5deg);opacity:0.85;}
-    .skills-block{display:flex;flex-direction:column;gap:1.8rem;}
-    .skill-group-name{font-family:'Bebas Neue',sans-serif;font-size:0.95rem;letter-spacing:0.22em;color:var(--yellow);border-bottom:1px solid #333;padding-bottom:0.3rem;margin-bottom:0.7rem;}
-    .skill-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
-    .tag{font-family:'Space Mono',monospace;font-size:0.65rem;padding:0.22rem 0.6rem;background:var(--concrete);color:var(--bone);border:1px solid #3a3a3a;letter-spacing:0.05em;transition:all 0.15s;}
-    .tag:hover{background:var(--yellow);color:var(--black);border-color:var(--yellow);}
-    @media(max-width:768px){#about{padding-top:7rem;}.about-grid{grid-template-columns:1fr;gap:2.5rem;}}
+    /* ── Section background and top padding to clear fixed nav ── */
+    #about { background: var(--asphalt); padding-top: 9rem; }
+
+    /* ── Two-column layout: bio text left, skills right ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+    /* Bio copy */
+    .about-left p       { color: var(--bone); margin-bottom: 1.3rem; font-size: 0.98rem; }
+    .about-left strong  { color: var(--white); }
+
+    /* Handwritten quote below bio */
+    .scrawl {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1rem;
+      color: var(--yellow);
+      display: block;
+      margin-top: 1.5rem;
+      transform: rotate(-1.5deg);
+      opacity: 0.85;
+    }
+
+    /* ── Skills sidebar: stacked groups ── */
+    .skills-block       { display: flex; flex-direction: column; gap: 1.8rem; }
+    .skill-group-name   {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      color: var(--yellow);
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.7rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    /* Individual skill pill — highlights yellow on hover */
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.22rem 0.6rem;
+      background: var(--concrete);
+      color: var(--bone);
+      border: 1px solid #3a3a3a;
+      letter-spacing: 0.05em;
+      transition: all 0.15s;
+    }
+    .tag:hover { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+
+    /* ── Mobile: stack columns ── */
+    @media (max-width: 768px) {
+      #about { padding-top: 7rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Nav injected by nav.js into this placeholder -->
   <div id="nav-placeholder"></div>
   <script src="nav.js"></script>
 
   <section id="about">
     <div class="section-inner">
       <div class="stamp">// About</div>
-      <h2 class="section-title">THE PERSON<br><span class="outline">BEHIND THE CODE </span></h2>
+      <h2 class="section-title">THE PERSON<br><span class="outline">BEHIND THE CODE</span></h2>
+
       <div class="about-grid reveal">
+
+        <!-- Bio copy -->
         <div class="about-left">
           <p>I didn't decide to become a data analyst. I <strong>realized I already was one.</strong> After years of running my own e-commerce businesses, I looked back at everything I'd been doing: tracking KPIs, digging into customer behavior, figuring out why something worked and something else did not. It clicked. This was the work I actually loved.</p>
           <p>I'm <strong>stubborn about getting to the real answer,</strong> not just the comfortable one. I look for patterns other people walk past, and I care just as much about communicating what I found as I do about finding it. An insight nobody understands is just noise.</p>
           <p>When I'm not in the data, I'm probably deep in a record collection somewhere between Black Sabbath and Fleetwood Mac, running a vendor event for small subculture businesses, or hot-gluing something onto a sticker. I built three businesses out of the same communities I belong to. That's not a side note — it's why I understand niche audiences, scrappy operations, and why the numbers behind a small business actually matter.</p>
         </div>
+
+        <!-- Skills grouped by category -->
         <div class="skills-block">
           <div>
             <div class="skill-group-name">Languages</div>
@@ -42,6 +93,7 @@
               <span class="tag">SQL</span>
               <span class="tag">HTML</span>
               <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
             </div>
           </div>
           <div>
@@ -68,17 +120,18 @@
             </div>
           </div>
         </div>
+
       </div>
+
+      <!-- Handwritten quote — oversized, slightly rotated -->
       <span class="scrawl" style="font-size:48px;">// without data, it's just an opinion.</span>
     </div>
   </section>
 
-  <footer>
-    <span class="footer-logo">J.S.</span>
-    <span>© 2026 Jessica Stubbs. Built by hand.</span>
-    <span>Parowan, UT</span>
-  </footer>
+  <!-- Footer injected by nav.js into this placeholder -->
+  <div id="footer-placeholder"></div>
 
+  <!-- Reveal animation: adds .visible class when element scrolls into view -->
   <script>
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(entries => {
