@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shock &amp; Price | Jessica Stubbs</title>
+  <link rel="stylesheet" href="../styles.css"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website"/>
+  <meta property="og:url"         content="https://jxdata.me"/>
+  <meta property="og:title"       content="Jessica Stubbs | Data Analyst Portfolio"/>
+  <meta property="og:description" content="8 years running e-commerce businesses taught me what data actually costs when you get it wrong. Now I have the technical skills to get it right."/>
+  <meta property="og:image"       content="https://jxdata.me/images/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height"content="630"/>
+  <!-- Twitter/X card -->
+  <meta name="twitter:card"        content="summary_large_image"/>
+  <meta name="twitter:title"       content="Jessica Stubbs | Data Analyst Portfolio"/>
+  <meta name="twitter:description" content="8 years running e-commerce businesses taught me what data actually costs when you get it wrong. Now I have the technical skills to get it right."/>
+  <meta name="twitter:image"       content="https://jxdata.me/images/og-image.jpg"/>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+  <script src="../nav.js"></script>
+
+  <div class="project-hero">
+    <div class="spray spray-red"></div>
+    <div class="project-hero-inner">
+      <div class="stamp">// Data Analysis · Visualization · March 12, 2026</div>
+      <h1 class="project-title">
+        SHOCK &amp; PRICE
+        <span class="outline">GEOPOLITICAL CRISES AND OIL MARKETS</span>
+      </h1>
+      <div class="project-meta-bar">
+        <div class="meta-item"><span>Date</span>March 12, 2026</div>
+        <div class="meta-item"><span>Type</span>Data Analysis · Visualization</div>
+        <div class="meta-item"><span>Datasets</span>EIA Brent, EIA WTI, EIA Gasoline, TTF Gas, World Bank CPI</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <div class="project-main">
+
+      <div class="section-block">
+        <div class="block-label">Overview / <span class="outline">Goal</span></div>
+        <div class="block-text">
+          <p>When geopolitical crises hit, oil markets move fast. This project tracks 30 years of major shocks to answer one question: <strong>how bad does it get, and how quickly?</strong></p>
+          <p>Built during the active 2026 US-Israel conflict with Iran and the first-ever closure of the Strait of Hormuz, this project combines <strong>Python-based event study analysis</strong> with <strong>Tableau dashboards</strong> to compare historical price responses, model forward-looking scenarios, and map which countries face the greatest exposure.</p>
+          <p>The full data lifecycle was covered: sourcing and cleaning raw EIA and World Bank data, event study methodology, scenario modeling calibrated from historical events, correlation analysis, and interactive Tableau dashboards published to Tableau Public.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Key <span class="outline">Findings</span></div>
+        <ul class="findings-list">
+          <li><strong>The 2026 US-Israel war on Iran peaked in just 4 days</strong>, nearly 3x faster than the Ukraine invasion which was previously the fastest shock in 30 years of data</li>
+          <li><strong>Brent crude hit $95.74 on Day 4</strong> before pulling back to $94.35 on March 9, tracking between the Prolonged Disruption and Escalation scenarios</li>
+          <li><strong>The Quick Resolution scenario is already falsified.</strong> Prices never retreated toward $68, ruling out a fast ceasefire outcome</li>
+          <li><strong>Asia-Pacific bears the heaviest burden.</strong> South Korea, Japan, Pakistan, Taiwan and Singapore score 5/5 on vulnerability, entirely import dependent with no pipeline alternatives. South Korea confirmed only 9 days of LNG reserves remaining as of March 5</li>
+          <li><strong>Markets price in risk before the trigger.</strong> Prices were already moving in the 30 days before most events, suggesting the true cost of a crisis begins before the first headline</li>
+          <li><strong>USA has the highest oil-inflation correlation in the dataset at 0.63.</strong> Deregulated markets pass shocks directly to consumers even when domestic production provides supply buffers</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Methods / <span class="outline">Process</span></div>
+        <div class="block-text">
+          <p>Daily Brent and WTI spot prices were sourced from the <strong>US Energy Information Administration</strong>, with TTF natural gas futures from Investing.com and country inflation data from the <strong>World Bank</strong>. Data was cleaned and merged using <strong>Pandas</strong>, with weekend gaps forward-filled to create a continuous daily series.</p>
+          <p>An <strong>event study framework</strong> normalized prices to 100 at each event date, enabling direct comparison of shock magnitude and speed across different price environments. Metrics including peak percentage, days to peak and days to recovery were computed for all 8 events.</p>
+          <p><strong>Scenario projections</strong> for the Iran 2026 conflict were modeled using exponential decay curves calibrated from historical events rather than assumed speeds: Scenario A from 9/11 (3 days), Scenario B from Libya 2011 (74 days), Scenario C from Ukraine 2022 (12 days). Actual price data was added alongside the projections as it became available.</p>
+          <p><strong>Country vulnerability scores</strong> were calculated as composite indices of oil exposure, LNG exposure and availability of pipeline alternatives. <strong>Inflation correlation analysis</strong> using World Bank CPI data identified which countries most directly pass oil price shocks to consumers.</p>
+          <p>All analysis was built in <strong>Jupyter Notebooks</strong> and visualized in <strong>Tableau Public</strong>.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Reflections / <span class="outline">Next Steps</span></div>
+        <div class="block-text">
+          <p>Building this project during an active geopolitical event added a dimension that tutorial projects rarely have. The data kept updating and the analysis had to keep pace. That pressure sharpened both the methodology and the storytelling.</p>
+          <p>The scenario modeling approach, calibrating speeds from historical analogues rather than assuming parameters, is something I would apply to other forecasting problems. The key insight is that the historical record already contains the answer to "how fast does this kind of thing move." You just have to look.</p>
+          <p>Next steps would include automating the data refresh pipeline via Google Sheets so Tableau Public can update on a schedule, expanding the country vulnerability model to include forex reserve buffers and subsidy capacity, and adding a correlation view showing which scenario the current price trajectory most closely resembles in real time.</p>
+        </div>
+      </div>
+
+      <a href="../projects.html" class="back-link">← Back to all projects</a>
+    </div>
+
+    <aside class="project-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Tools Used</div>
+        <div class="tool-tags">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">Pandas</span>
+          <span class="tool-tag">NumPy</span>
+          <span class="tool-tag">Matplotlib</span>
+          <span class="tool-tag">Tableau</span>
+          <span class="tool-tag">Jupyter Notebook</span>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Links</div>
+        <div class="project-links">
+          <a href="https://github.com/rangywulf/shock_and_price" target="_blank" class="project-link">{} View on GitHub</a>
+          <a href="https://public.tableau.com/app/profile/jess.stubbs/viz/ShockOilPrices/History" target="_blank" class="project-link">&#9654; Dashboard 1: The History</a>
+          <a href="https://public.tableau.com/app/profile/jess.stubbs/viz/ShockOilPrices/Iran2026#1" target="_blank" class="project-link">&#9654; Dashboard 2: Iran 2026</a>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Data Sources</div>
+        <div class="project-links">
+          <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=RBRTE&f=D" target="_blank" class="project-link">EIA Brent Spot Price</a>
+          <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=RWTC&f=D" target="_blank" class="project-link">EIA WTI Spot Price</a>
+          <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=EMM_EPMR_PTE_NUS_DPG&f=W" target="_blank" class="project-link">EIA US Retail Gasoline</a>
+          <a href="https://www.investing.com/commodities/dutch-ttf-gas-c1-futures-historical-data" target="_blank" class="project-link">TTF Natural Gas Futures</a>
+          <a href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG" target="_blank" class="project-link">World Bank CPI Data</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="footer-placeholder"></div>
+</body>
+</html>
