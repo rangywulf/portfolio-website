@@ -1,3 +1,4 @@
+# WordPress leftovers
 [[redirects]]
   from = "/wp-admin/*"
   to = "/403.html"
@@ -24,7 +25,80 @@
   status = 403
 
 [[redirects]]
+  from = "/wp-json/*"
+  to = "/403.html"
+  status = 403
+
+# Common admin/login endpoints
+[[redirects]]
+  from = "/admin/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/dashboard/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/login/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/signin/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/user/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/account/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/password-reset/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/forgot/*"
+  to = "/403.html"
+  status = 403
+
+# API endpoints
+[[redirects]]
+  from = "/api/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/graphql"
+  to = "/403.html"
+  status = 403
+
+# Common PHP / hidden files
+[[redirects]]
   from = "/phpmyadmin/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/config.php"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/db.php"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/phpinfo.php"
   to = "/403.html"
   status = 403
 
@@ -33,6 +107,70 @@
   to = "/403.html"
   status = 403
 
+[[redirects]]
+  from = "/.git/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/*.bak"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/*.zip"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/.htaccess"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/.htpasswd"
+  to = "/403.html"
+  status = 403
+
+# Funny decoy / honeypot paths
+[[redirects]]
+  from = "/secret-door/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/treasure/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/hidden/*"
+  to = "/403.html"
+  status = 403
+
+[[redirects]]
+  from = "/super-admin/*"
+  to = "/403.html"
+  status = 403
+
+# --------------------------
+# Security headers
+# --------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Content-Security-Policy = """
+      default-src 'self';
+      img-src 'self' data:;
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self';
+    """
+# Catch-all 404 must always be last
 [[redirects]]
   from = "/*"
   to = "/404.html"
