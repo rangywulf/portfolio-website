@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>403 | Jessica Stubbs</title>
+
+  <link rel="stylesheet" href="styles.css"/>
+
+  <style>
+    #error {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .error-bg-num {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(18rem, 35vw, 32rem);
+      color: transparent;
+      -webkit-text-stroke: 1px #1e1e1e;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    .error-inner { position: relative; z-index: 2; max-width: 620px; }
+
+    .error-code {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .error-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.9;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .error-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--yellow);
+      display: block;
+    }
+
+    .error-text {
+      font-family: 'Special Elite', monospace;
+      color: var(--bone);
+      font-size: 0.97rem;
+      line-height: 1.75;
+      margin-bottom: 0.8rem;
+    }
+    .error-text strong { color: var(--white); }
+
+    .error-readout {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      line-height: 2;
+      margin-bottom: 2.5rem;
+      border-left: 2px solid #252525;
+      padding-left: 1rem;
+    }
+    .error-readout .val { color: var(--yellow); }
+
+    .error-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .error-btn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      padding: 0.7rem 1.4rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s;
+    }
+    .btn-home {
+      background: var(--yellow);
+      color: var(--black);
+      border: 3px solid var(--yellow);
+    }
+    .btn-home:hover {
+      background: transparent;
+      color: var(--yellow);
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--yellow);
+    }
+    .btn-projects {
+      background: transparent;
+      color: var(--white);
+      border: 3px solid var(--white);
+    }
+    .btn-projects:hover {
+      background: var(--white);
+      color: var(--black);
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--white);
+    }
+
+    @media (max-width: 768px) {
+      #error { padding: 8rem 1.5rem 4rem; }
+      .error-ctas { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+  <script src="nav.js"></script>
+
+  <section id="error">
+    <div class="error-bg-num">403</div>
+
+    <div class="error-inner">
+      <div class="stamp">// Error · Forbidden</div>
+
+      <h1 class="error-title">
+        ACCESS
+        <span class="outline">DENIED</span>
+      </h1>
+
+      <p class="error-text">This page is locked down. <strong>Bots and scanners, your attempt to sneak in is noted and utterly useless.</strong> Humans, maybe check that link again.</p>
+
+      <div class="error-readout">
+        <div>STATUS &nbsp;&nbsp;&nbsp;&nbsp; <span class="val">403</span></div>
+        <div>RECORDS &nbsp;&nbsp; <span class="val">0</span></div>
+        <div>OUTLIERS &nbsp; <span class="val">YOU</span></div>
+        <div>NEXT STEP &nbsp;<span class="val">GO AWAY</span></div>
+      </div>
+
+      <div class="error-ctas">
+        <a href="index.html" class="error-btn btn-home">← Back to Home</a>
+        <a href="projects.html" class="error-btn btn-projects">View Projects ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+</body>
+</html>
