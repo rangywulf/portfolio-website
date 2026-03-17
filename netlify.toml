@@ -153,23 +153,6 @@
   to = "/403.html"
   status = 403
 
-# --------------------------
-# Security headers
-# --------------------------
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    Content-Security-Policy = """
-      default-src 'self';
-      img-src 'self' data:;
-      script-src 'self';
-      style-src 'self' 'unsafe-inline';
-      font-src 'self' https://fonts.gstatic.com;
-      connect-src 'self';
-    """
 # Catch-all 404 must always be last
 [[redirects]]
   from = "/*"
