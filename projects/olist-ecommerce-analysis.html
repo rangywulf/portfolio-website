@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Olist E-Commerce Analysis | Jessica Stubbs</title>
+  <link rel="stylesheet" href="../styles.css"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website"/>
+  <meta property="og:url"         content="https://jxdata.me"/>
+  <meta property="og:title"       content="Jessica Stubbs | Data Analyst Portfolio"/>
+  <meta property="og:description" content="8 years running e-commerce businesses taught me what data actually costs when you get it wrong. Now I have the technical skills to get it right."/>
+  <meta property="og:image"       content="https://jxdata.me/images/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height"content="630"/>
+  <!-- Twitter/X card -->
+  <meta name="twitter:card"        content="summary_large_image"/>
+  <meta name="twitter:title"       content="Jessica Stubbs | Data Analyst Portfolio"/>
+  <meta name="twitter:description" content="8 years running e-commerce businesses taught me what data actually costs when you get it wrong. Now I have the technical skills to get it right."/>
+  <meta name="twitter:image"       content="https://jxdata.me/images/og-image.jpg"/>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+  <script src="../nav.js"></script>
+
+  <div class="project-hero">
+    <div class="spray spray-red"></div>
+    <div class="project-hero-inner">
+      <div class="stamp">// Data Analysis · SQL · March 2026</div>
+      <h1 class="project-title">
+        CART TO COMPLAINT
+        <span class="outline">AN OPERATIONAL SQL ANALYSIS OF BRAZILIAN E-COMMERCE</span>
+      </h1>
+      <div class="project-meta-bar">
+        <div class="meta-item"><span>Date</span>March 2026</div>
+        <div class="meta-item"><span>Type</span>Data Analysis · SQL · Visualization</div>
+        <div class="meta-item"><span>Dataset</span>Olist Brazilian E-Commerce, 9 tables, ~100K orders</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <div class="project-main">
+
+      <div class="section-block">
+        <div class="block-label">Overview / <span class="outline">Goal</span></div>
+        <div class="block-text">
+          <p>Where is this marketplace losing money, time, and customers? That is the central question behind this project.</p>
+          <p>Using 100K real orders from Olist, a Brazilian e-commerce marketplace, this analysis covers the full operational picture across 9 relational tables: revenue by category, delivery performance by state and seller, a composite seller scorecard, and the relationship between late deliveries and customer review scores.</p>
+          <p>Every insight came from SQL. No Python, no shortcuts. Queries ranged from basic aggregations to multi-table joins, window functions, CTEs, and subqueries. The results were visualized in a Tableau dashboard themed around the Brazilian flag colors.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Key <span class="outline">Findings</span></div>
+        <ul class="findings-list">
+          <li><strong>Health and Beauty leads revenue at $1.26M</strong>, but Watches and Gifts has the highest average order value at $201. High revenue does not always mean high value per transaction.</li>
+          <li><strong>Revenue grew nearly 10x in one year</strong>, from $111K in January 2017 to $924K in January 2018. A Black Friday spike to $987K in November 2017 confirms seasonal demand is significant.</li>
+          <li><strong>91.7% of orders arrive before the estimated delivery date.</strong> Olist deliberately pads estimates to manage customer expectations.</li>
+          <li><strong>4 days late is the critical threshold.</strong> Crossing it drops average review scores from 4.29 to below 2.5, a drop of more than one full star.</li>
+          <li><strong>37% of all 1-star reviews are linked to late delivery.</strong> But 63% are not, meaning product quality and unmet expectations matter just as much.</li>
+          <li><strong>High volume sellers do not dominate the composite scorecard.</strong> One seller with nearly 1,000 orders scores below 3.5 on reviews, quietly damaging the platform at scale.</li>
+          <li><strong>The worst rated categories have low late delivery rates.</strong> Office Furniture, Fashion Male Clothing, and Fixed Telephony score poorly because of product quality issues, not logistics problems.</li>
+        </ul>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Methods / <span class="outline">Process</span></div>
+        <div class="block-text">
+          <p>The Olist dataset was downloaded from Kaggle as 9 CSV files and imported into a local SQLite database using the command line. All analysis was written in SQL using VSCode with the SQLTools and SQLite extensions.</p>
+          <p>The project was structured across 6 phases: data setup and exploration, revenue and category analysis, delivery performance, seller scorecard, review score investigation, and Tableau dashboard build. Each phase produced exported CSV results used to build the final dashboard.</p>
+          <p>The seller scorecard used two chained CTEs and three window functions to rank sellers across review score, delivery performance, and order volume simultaneously, then combined them into a composite score. Sellers were flagged as High Volume Low Quality or Hidden Gem based on their metric combinations.</p>
+          <p>The review score investigation used subqueries and CASE WHEN bucketing to find the exact delivery delay threshold where customer satisfaction drops sharply, and then cross-referenced that finding against product categories to separate delivery problems from product quality problems.</p>
+          <p>All findings were visualized in a Tableau Public dashboard using Brazilian flag colors.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label">Recommendations / <span class="outline">Next Steps</span></div>
+        <div class="block-text">
+          <p>The 4-day late threshold is the most actionable finding. An automated alert system that flags orders approaching that threshold would give Olist a window to intervene before a bad review is submitted.</p>
+          <p>High Volume Low Quality sellers represent a platform risk. They drive revenue but erode trust. A seller review process triggered by sustained low scores would protect the platform without cutting volume unnecessarily.</p>
+          <p>The categories with poor review scores and low late delivery rates need a different fix entirely. Office Furniture and Fashion Male Clothing are product quality problems, not logistics problems. Stricter listing standards or seller onboarding requirements in those categories would address the root cause.</p>
+          <p>A natural next step would be rebuilding this analysis in a cloud SQL environment like BigQuery, automating the data pipeline, and connecting Tableau directly to a live data source rather than static CSV exports.</p>
+        </div>
+      </div>
+
+      <a href="../projects.html" class="back-link">← Back to all projects</a>
+    </div>
+
+    <aside class="project-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Tools Used</div>
+        <div class="tool-tags">
+          <span class="tool-tag">SQL</span>
+          <span class="tool-tag">SQLite</span>
+          <span class="tool-tag">Tableau</span>
+          <span class="tool-tag">VSCode</span>
+          <span class="tool-tag">Git</span>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Links</div>
+        <div class="project-links">
+          <a href="https://github.com/rangywulf/olist-ecommerce-analysis" target="_blank" class="project-link">{} View on GitHub</a>
+          <a href="https://public.tableau.com/app/profile/jess.stubbs/viz/OlistE-commerceOperationsAnalysis/Dashboard1" target="_blank" class="project-link">&#9654; View Dashboard</a>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Data Source</div>
+        <div class="project-links">
+          <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" class="project-link">Brazilian E-Commerce Dataset via Kaggle</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="footer-placeholder"></div>
+</body>
+</html>
