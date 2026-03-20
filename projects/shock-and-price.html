@@ -28,15 +28,15 @@
   <div class="project-hero">
     <div class="spray spray-red"></div>
     <div class="project-hero-inner">
-      <div class="stamp">// Data Analysis · Visualization · March 12, 2026</div>
+      <div class="stamp">// Data Analysis · Visualization · March 19, 2026</div>
       <h1 class="project-title">
         SHOCK &amp; PRICE
         <span class="outline">GEOPOLITICAL CRISES AND OIL MARKETS</span>
       </h1>
       <div class="project-meta-bar">
-        <div class="meta-item"><span>Date</span>March 12, 2026</div>
+        <div class="meta-item"><span>Date</span>March 19, 2026</div>
         <div class="meta-item"><span>Type</span>Data Analysis · Visualization</div>
-        <div class="meta-item"><span>Datasets</span>EIA Brent, EIA WTI, EIA Gasoline, TTF Gas, World Bank CPI</div>
+        <div class="meta-item"><span>Datasets</span>EIA Brent, EIA WTI, EIA Gasoline, TTF Gas, World Bank CPI, FRED CPI</div>
       </div>
     </div>
   </div>
@@ -48,8 +48,8 @@
         <div class="block-label">Overview / <span class="outline">Goal</span></div>
         <div class="block-text">
           <p>When geopolitical crises hit, oil markets move fast. This project tracks 30 years of major shocks to answer one question: <strong>how bad does it get, and how quickly?</strong></p>
-          <p>Built during the active 2026 US-Israel conflict with Iran and the first-ever closure of the Strait of Hormuz, this project combines <strong>Python-based event study analysis</strong> with <strong>Tableau dashboards</strong> to compare historical price responses, model forward-looking scenarios, and map which countries face the greatest exposure.</p>
-          <p>The full data lifecycle was covered: sourcing and cleaning raw EIA and World Bank data, event study methodology, scenario modeling calibrated from historical events, correlation analysis, and interactive Tableau dashboards published to Tableau Public.</p>
+          <p>Built during the active 2026 US-Israel conflict with Iran and the first-ever closure of the Strait of Hormuz, this project combines <strong>Python-based event study analysis</strong> with <strong>Tableau dashboards</strong> to compare historical price responses, model forward-looking scenarios, map which countries face the greatest exposure, and track what it all means at the pump for American consumers.</p>
+          <p>The full data lifecycle was covered: sourcing and cleaning raw EIA, World Bank and FRED data across five Jupyter notebooks, event study methodology, scenario modeling calibrated from historical events, inflation adjustment, lag correlation analysis, and interactive Tableau dashboards published to Tableau Public.</p>
         </div>
       </div>
 
@@ -57,11 +57,13 @@
         <div class="block-label">Key <span class="outline">Findings</span></div>
         <ul class="findings-list">
           <li><strong>The 2026 US-Israel war on Iran peaked in just 4 days</strong>, nearly 3x faster than the Ukraine invasion which was previously the fastest shock in 30 years of data</li>
-          <li><strong>Brent crude hit $95.74 on Day 4</strong> before pulling back to $94.35 on March 9, tracking between the Prolonged Disruption and Escalation scenarios</li>
+          <li><strong>Brent crude crossed $101 on March 16</strong>, entering Prolonged Disruption territory for the first time since the conflict began</li>
           <li><strong>The Quick Resolution scenario is already falsified.</strong> Prices never retreated toward $68, ruling out a fast ceasefire outcome</li>
           <li><strong>Asia-Pacific bears the heaviest burden.</strong> South Korea, Japan, Pakistan, Taiwan and Singapore score 5/5 on vulnerability, entirely import dependent with no pipeline alternatives. South Korea confirmed only 9 days of LNG reserves remaining as of March 5</li>
           <li><strong>Markets price in risk before the trigger.</strong> Prices were already moving in the 30 days before most events, suggesting the true cost of a crisis begins before the first headline</li>
           <li><strong>USA has the highest oil-inflation correlation in the dataset at 0.63.</strong> Deregulated markets pass shocks directly to consumers even when domestic production provides supply buffers</li>
+          <li><strong>Brent price changes take approximately one week to reach the pump.</strong> Lag correlation analysis across 1,719 weekly observations shows the correlation jumps from 0.21 at zero lag to 0.54 at one week, then drops off sharply</li>
+          <li><strong>In inflation-adjusted terms, 2008 was worse than today.</strong> The 2008 Financial Crisis peak equals nearly $5.00 per gallon in today's dollars. The Iran 2026 spike has not yet approached that level in real purchasing power terms</li>
         </ul>
       </div>
 
@@ -72,6 +74,7 @@
           <p>An <strong>event study framework</strong> normalized prices to 100 at each event date, enabling direct comparison of shock magnitude and speed across different price environments. Metrics including peak percentage, days to peak and days to recovery were computed for all 8 events.</p>
           <p><strong>Scenario projections</strong> for the Iran 2026 conflict were modeled using exponential decay curves calibrated from historical events rather than assumed speeds: Scenario A from 9/11 (3 days), Scenario B from Libya 2011 (74 days), Scenario C from Ukraine 2022 (12 days). Actual price data was added alongside the projections as it became available.</p>
           <p><strong>Country vulnerability scores</strong> were calculated as composite indices of oil exposure, LNG exposure and availability of pipeline alternatives. <strong>Inflation correlation analysis</strong> using World Bank CPI data identified which countries most directly pass oil price shocks to consumers.</p>
+          <p>A fifth notebook analyzed <strong>US retail gasoline prices</strong> in depth, adjusting 30 years of weekly pump prices to February 2026 dollars using monthly CPI data from <strong>FRED</strong>. Lag correlation analysis confirmed that Brent price changes take approximately one week to show up at the pump. Per-president panel charts break the full history into presidential terms for lay audience readability.</p>
           <p>All analysis was built in <strong>Jupyter Notebooks</strong> and visualized in <strong>Tableau Public</strong>.</p>
         </div>
       </div>
@@ -104,8 +107,10 @@
         <div class="sidebar-card-title">Links</div>
         <div class="project-links">
           <a href="https://github.com/rangywulf/shock_and_price" target="_blank" class="project-link">{} View on GitHub</a>
+          <a href="https://medium.com/@jxdata/your-gas-bill-is-a-war-report-e4db8988af9b" target="_blank" class="project-link">&#9654; Read on Medium</a>
           <a href="https://public.tableau.com/app/profile/jess.stubbs/viz/ShockOilPrices/History" target="_blank" class="project-link">&#9654; Dashboard 1: The History</a>
           <a href="https://public.tableau.com/app/profile/jess.stubbs/viz/ShockOilPrices/Iran2026#1" target="_blank" class="project-link">&#9654; Dashboard 2: Iran 2026</a>
+          <a href="https://public.tableau.com/app/profile/jess.stubbs/viz/ShockOilPrices/AtthePump" target="_blank" class="project-link">&#9654; Dashboard 3: At the Pump</a>
         </div>
       </div>
       <div class="sidebar-card">
@@ -116,6 +121,7 @@
           <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=EMM_EPMR_PTE_NUS_DPG&f=W" target="_blank" class="project-link">EIA US Retail Gasoline</a>
           <a href="https://www.investing.com/commodities/dutch-ttf-gas-c1-futures-historical-data" target="_blank" class="project-link">TTF Natural Gas Futures</a>
           <a href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG" target="_blank" class="project-link">World Bank CPI Data</a>
+          <a href="https://fred.stlouisfed.org/series/CPIAUCSL" target="_blank" class="project-link">FRED US CPI (Monthly)</a>
         </div>
       </div>
     </aside>
