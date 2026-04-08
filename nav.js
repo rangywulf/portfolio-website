@@ -14,6 +14,7 @@
     'projects.html': 'projects.html',
     'experience.html': 'experience.html',
     'contact.html': 'contact.html',
+    'repos.html': 'repos.html',
   };
 
   const navHTML = `
@@ -23,6 +24,7 @@
       <li><a href="${root}about.html" ${page === 'about.html' ? 'class="active"' : ''}>About</a></li>
       <li><a href="${root}projects.html" ${(page === 'projects.html' || isSubfolder) ? 'class="active"' : ''}>Projects</a></li>
       <li><a href="${root}experience.html" ${page === 'experience.html' ? 'class="active"' : ''}>Experience</a></li>
+      <li><a href="${root}repos.html" ${page === 'repos.html' ? 'class="active"' : ''}>Repos</a></li>
       <li><a href="${root}contact.html" ${page === 'contact.html' ? 'class="active"' : ''}>Contact</a></li>
     </ul>
     <div class="nav-right">

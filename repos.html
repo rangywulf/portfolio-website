@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Repos | jxdata.me</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="nav.js" defer></script>
+
+  <style>
+    /* ─── PAGE-SPECIFIC STYLES ────────────────────────────── */
+
+    .repos-hero {
+      padding: 9rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .repos-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .repos-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    .repos-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--yellow);
+    }
+
+    .repos-sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.95rem;
+      color: var(--bone);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .repos-sub a {
+      color: var(--yellow);
+      text-decoration: none;
+      border-bottom: 1px solid var(--yellow);
+      transition: opacity 0.15s;
+    }
+
+    .repos-sub a:hover { opacity: 0.7; }
+
+    /* ─── STATS BAR ─────────────────────────────────────────── */
+    .stats-bar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      display: flex;
+      gap: 3rem;
+      border-top: 1px solid var(--concrete);
+      flex-wrap: wrap;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--yellow);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      display: block;
+    }
+
+    /* ─── FILTER BAR ────────────────────────────────────────── */
+    .filter-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--concrete);
+    }
+
+    .filter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 0.5rem;
+    }
+
+    .filter-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--concrete);
+      background: transparent;
+      color: var(--muted);
+      cursor: crosshair;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .filter-btn.active {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--yellow);
+    }
+
+    /* ─── REPO GRID ─────────────────────────────────────────── */
+    .repos-section {
+      padding: 3rem 2.5rem 6rem;
+    }
+
+    .repos-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--concrete);
+      border: 1px solid var(--concrete);
+    }
+
+    /* ─── REPO CARD ─────────────────────────────────────────── */
+    .card {
+      background: var(--black);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--yellow);
+      transition: height 0.2s ease;
+    }
+
+    .card:hover { background: var(--asphalt); }
+    .card:hover::before { height: 100%; }
+
+    .card.featured { background: #111108; }
+    .card.featured::before { height: 100%; background: var(--yellow); }
+
+    .featured-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 0.2rem 0.55rem;
+      align-self: flex-start;
+    }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    .card-name a {
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .card-name a:hover { color: var(--yellow); }
+
+    .card-desc {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.82rem;
+      color: var(--bone);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--concrete);
+      margin-top: auto;
+    }
+
+    .lang-indicator {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--bone);
+    }
+
+    .lang-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .meta-stat {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .meta-time {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-left: auto;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .btn-repo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bone);
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--concrete);
+      text-decoration: none;
+      transition: all 0.15s;
+      position: relative;
+    }
+
+    .btn-repo::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--yellow);
+      transform: scaleY(0);
+      transition: transform 0.2s;
+    }
+
+    .btn-repo:hover { border-color: var(--yellow); color: var(--yellow); }
+    .btn-repo:hover::before { transform: scaleY(1); }
+
+    .btn-case {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--yellow);
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-case:hover { background: var(--white); border-color: var(--white); }
+
+    /* ─── SKELETON ──────────────────────────────────────────── */
+    .skeleton-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--concrete);
+      border: 1px solid var(--concrete);
+    }
+
+    .skeleton-card {
+      background: var(--black);
+      padding: 1.75rem;
+      animation: skelPulse 1.6s ease-in-out infinite;
+    }
+
+    .skel { height: 10px; background: var(--concrete); margin-bottom: 0.75rem; border-radius: 1px; }
+    .skel.tall  { height: 32px; width: 55%; }
+    .skel.wide  { width: 80%; }
+    .skel.mid   { width: 60%; }
+    .skel.short { width: 35%; }
+
+    @keyframes skelPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+
+    .status-wrap {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 2.5rem;
+      display: none;
+    }
+
+    .status-msg {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .stats-bar { gap: 1.5rem; padding: 1.5rem; }
+      .filter-section { padding: 0 1.5rem 1.5rem; }
+      .repos-section { padding: 2rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <div id="nav-placeholder"></div>
+
+  <!-- HERO -->
+  <section class="repos-hero">
+    <div class="spray spray-red"></div>
+    <div class="spray spray-yel"></div>
+    <div class="repos-hero-inner">
+      <div class="stamp">// github.com/rangywulf</div>
+      <h1 class="repos-title">ALL THE<br><span class="outline">CODE</span></h1>
+      <p class="repos-sub">
+        Every repo. Sorted by what I've been touching lately.
+        Portfolio projects are called out. The rest is the chaos behind the curtain.
+        Full source on <a href="https://github.com/rangywulf" target="_blank" rel="noopener">GitHub</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar" id="stats-bar" style="visibility:hidden;">
+    <div>
+      <span class="stat-value" id="stat-repos">--</span>
+      <span class="stat-label">Repositories</span>
+    </div>
+    <div>
+      <span class="stat-value" id="stat-langs">--</span>
+      <span class="stat-label">Languages</span>
+    </div>
+    <div>
+      <span class="stat-value" id="stat-updated">--</span>
+      <span class="stat-label">Last Pushed</span>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-section" id="filter-section" style="visibility:hidden;">
+    <span class="filter-label">Filter by language:</span>
+    <button class="filter-btn active" data-filter="all">All</button>
+  </div>
+
+  <!-- REPOS -->
+  <section class="repos-section">
+    <div class="skeleton-grid" id="skeleton">
+      <div class="skeleton-card"><div class="skel tall"></div><div class="skel wide"></div><div class="skel mid"></div><div class="skel short"></div></div>
+      <div class="skeleton-card"><div class="skel tall"></div><div class="skel wide"></div><div class="skel mid"></div><div class="skel short"></div></div>
+      <div class="skeleton-card"><div class="skel tall"></div><div class="skel wide"></div><div class="skel mid"></div><div class="skel short"></div></div>
+      <div class="skeleton-card"><div class="skel tall"></div><div class="skel wide"></div><div class="skel mid"></div><div class="skel short"></div></div>
+      <div class="skeleton-card"><div class="skel tall"></div><div class="skel wide"></div><div class="skel mid"></div><div class="skel short"></div></div>
+      <div class="skeleton-card"><div class="skel tall"></div><div class="skel wide"></div><div class="skel mid"></div><div class="skel short"></div></div>
+    </div>
+    <div class="repos-grid" id="repo-grid" style="display:none;"></div>
+    <div class="status-wrap" id="status-wrap">
+      <p class="status-msg" id="status-msg"></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    const GITHUB_USERNAME = 'rangywulf';
+
+    const FEATURED_REPOS = [
+      'shock_and_price',
+      'olist-ecommerce-analysis',
+      'job-market-analytics'
+    ];
+
+    const PORTFOLIO_LINKS = {
+      'shock_and_price':          '/shock-and-price.html',
+      'olist-ecommerce-analysis': '/olist.html',
+    };
+
+    const LANG_COLORS = {
+      Python:     '#3572A5',
+      JavaScript: '#f1e05a',
+      HTML:       '#e34c26',
+      CSS:        '#563d7c',
+      SQL:        '#e38c00',
+      Shell:      '#89e051',
+      Jupyter:    '#DA5B0B',
+      YAML:       '#cb171e',
+      TypeScript: '#2b7489',
+      R:          '#198CE7',
+    };
+
+    let allRepos     = [];
+    let activeFilter = 'all';
+
+    const skeleton      = document.getElementById('skeleton');
+    const grid          = document.getElementById('repo-grid');
+    const statusWrap    = document.getElementById('status-wrap');
+    const statusMsg     = document.getElementById('status-msg');
+    const filterSection = document.getElementById('filter-section');
+    const statsBar      = document.getElementById('stats-bar');
+
+    async function fetchRepos() {
+      try {
+        const res = await fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=100`
+        );
+        if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+        const data = await res.json();
+
+        allRepos = data.sort((a, b) => {
+          const af = FEATURED_REPOS.includes(a.name) ? 0 : 1;
+          const bf = FEATURED_REPOS.includes(b.name) ? 0 : 1;
+          if (af !== bf) return af - bf;
+          return new Date(b.pushed_at) - new Date(a.pushed_at);
+        });
+
+        renderStats(allRepos);
+        buildFilters(allRepos);
+        renderGrid(allRepos);
+        statsBar.style.visibility      = 'visible';
+        filterSection.style.visibility = 'visible';
+
+      } catch (err) {
+        showError(err.message);
+      }
+    }
+
+    function renderStats(repos) {
+      const langs  = new Set(repos.map(r => r.language).filter(Boolean));
+      const latest = repos.reduce((a, b) =>
+        new Date(a.pushed_at) > new Date(b.pushed_at) ? a : b
+      );
+      document.getElementById('stat-repos').textContent   = repos.length;
+      document.getElementById('stat-langs').textContent   = langs.size;
+      document.getElementById('stat-updated').textContent = timeAgo(latest.pushed_at);
+    }
+
+    function buildFilters(repos) {
+      const counts = {};
+      repos.forEach(r => { if (r.language) counts[r.language] = (counts[r.language] || 0) + 1; });
+      Object.entries(counts).sort((a, b) => b[1] - a[1]).forEach(([lang]) => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = lang;
+        btn.textContent = lang;
+        btn.addEventListener('click', () => setFilter(lang));
+        filterSection.appendChild(btn);
+      });
+    }
+
+    function setFilter(f) {
+      activeFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.filter === f)
+      );
+      const filtered = f === 'all' ? allRepos : allRepos.filter(r => r.language === f);
+      renderGrid(filtered);
+    }
+
+    document.querySelector('[data-filter="all"]').addEventListener('click', () => setFilter('all'));
+
+    function renderGrid(repos) {
+      skeleton.style.display = 'none';
+      grid.innerHTML = '';
+      if (!repos.length) {
+        showStatus('No repos match that filter.');
+        grid.style.display = 'none';
+        return;
+      }
+      statusWrap.style.display = 'none';
+      grid.style.display = 'grid';
+      repos.forEach(r => grid.appendChild(buildCard(r)));
+    }
+
+    function buildCard(repo) {
+      const featured = FEATURED_REPOS.includes(repo.name);
+      const caseLink = PORTFOLIO_LINKS[repo.name];
+      const dotColor = LANG_COLORS[repo.language] || '#6a6560';
+
+      const card = document.createElement('div');
+      card.className = featured ? 'card featured' : 'card';
+
+      card.innerHTML = `
+        ${featured ? '<span class="featured-tag">★ Portfolio Project</span>' : ''}
+        <div class="card-name">
+          <a href="${repo.html_url}" target="_blank" rel="noopener">${formatName(repo.name)}</a>
+        </div>
+        <p class="card-desc">${repo.description || '<em style="opacity:0.4">No description yet.</em>'}</p>
+        <div class="card-meta">
+          ${repo.language ? `<span class="lang-indicator"><span class="lang-dot" style="background:${dotColor};"></span>${repo.language}</span>` : ''}
+          ${repo.stargazers_count > 0 ? `<span class="meta-stat">★ ${repo.stargazers_count}</span>` : ''}
+          ${repo.forks_count > 0      ? `<span class="meta-stat">⑂ ${repo.forks_count}</span>`      : ''}
+          <span class="meta-time">${timeAgo(repo.pushed_at)}</span>
+        </div>
+        <div class="card-links">
+          <a class="btn-repo" href="${repo.html_url}" target="_blank" rel="noopener">View Repo ↗</a>
+          ${caseLink ? `<a class="btn-case" href="${caseLink}">Case Study →</a>` : ''}
+        </div>
+      `;
+      return card;
+    }
+
+    function formatName(n) { return n.replace(/[-_]/g, ' '); }
+
+    function timeAgo(d) {
+      const diff = Date.now() - new Date(d);
+      const mins = Math.floor(diff / 60000);
+      const h = Math.floor(mins / 60), days = Math.floor(h / 24);
+      const w = Math.floor(days / 7), mo = Math.floor(days / 30);
+      if (mo > 11) return `${Math.floor(mo/12)}y ago`;
+      if (mo > 1)  return `${mo}mo ago`;
+      if (w > 1)   return `${w}w ago`;
+      if (days > 1)return `${days}d ago`;
+      if (h > 1)   return `${h}h ago`;
+      return 'just now';
+    }
+
+    function showError(msg) {
+      skeleton.style.display = 'none';
+      grid.style.display = 'none';
+      statusWrap.style.display = 'block';
+      statusMsg.textContent = `Couldn't load repos: ${msg}`;
+    }
+
+    function showStatus(msg) {
+      statusWrap.style.display = 'block';
+      statusMsg.textContent = msg;
+    }
+
+    fetchRepos();
+  </script>
+
+</body>
+</html>
