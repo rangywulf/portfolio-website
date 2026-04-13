@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Jess Stubbs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+    /* ── HERO ── */
+    .writing-hero {
+      padding: 9rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .writing-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .writing-hero .section-title { margin-bottom: 1.2rem; }
+    .writing-hero .hero-sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.95rem;
+      color: var(--bone);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+    .writing-hero .hero-sub a {
+      color: var(--yellow);
+      text-decoration: none;
+      border-bottom: 1px solid var(--yellow);
+      transition: opacity 0.15s;
+    }
+    .writing-hero .hero-sub a:hover { opacity: 0.7; }
+
+    /* ── GRID SECTION ── */
+    .writing-section {
+      padding: 5rem 2.5rem 7rem;
+      position: relative;
+    }
+    .writing-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── STATUS BAR ── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #252525;
+    }
+    .status-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .status-label span {
+      color: var(--yellow);
+    }
+    .status-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+      margin-right: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── SINGLE CARD ── */
+    .article-card {
+      background: var(--asphalt);
+      border: 1px solid #252525;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .article-card:hover {
+      border-color: var(--yellow);
+      transform: translateY(-3px);
+    }
+    /* left accent bar */
+    .article-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--yellow);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s;
+    }
+    .article-card:hover::before { transform: scaleY(1); }
+
+    /* thumbnail */
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(30%) contrast(1.05);
+      transition: filter 0.3s;
+      background: var(--concrete); /* fallback while loading */
+    }
+    .article-card:hover .card-thumb {
+      filter: grayscale(0%) contrast(1.1);
+    }
+    /* hide broken image icon if thumb missing */
+    .card-thumb[data-missing="true"] {
+      display: none;
+    }
+
+    .card-body {
+      padding: 1.4rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0.75rem;
+    }
+    .card-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      color: var(--white);
+      transition: color 0.15s;
+    }
+    .article-card:hover .card-title { color: var(--yellow); }
+    .card-excerpt {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.83rem;
+      color: var(--bone);
+      line-height: 1.7;
+      flex: 1;
+      /* clamp to 3 lines */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-top: 0.25rem;
+    }
+
+    /* ── SKELETON LOADER ── */
+    .skeleton-card {
+      background: var(--asphalt);
+      border: 1px solid #252525;
+      overflow: hidden;
+    }
+    .skeleton-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      background: var(--concrete);
+      animation: shimmer 1.4s infinite;
+    }
+    .skeleton-body { padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .skeleton-line {
+      height: 10px;
+      background: var(--concrete);
+      border-radius: 2px;
+      animation: shimmer 1.4s infinite;
+    }
+    .skeleton-line.short { width: 40%; }
+    .skeleton-line.title { height: 22px; width: 85%; }
+    .skeleton-line.mid   { width: 95%; }
+    .skeleton-line.long  { width: 70%; }
+    @keyframes shimmer {
+      0%   { opacity: 0.5; }
+      50%  { opacity: 1;   }
+      100% { opacity: 0.5; }
+    }
+
+    /* ── ERROR STATE ── */
+    .error-state {
+      grid-column: 1 / -1;
+      padding: 3rem;
+      border: 1px dashed #333;
+      text-align: center;
+    }
+    .error-state p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .error-state a {
+      color: var(--yellow);
+      text-decoration: none;
+      border-bottom: 1px solid var(--yellow);
+    }
+
+
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .writing-hero { padding: 8rem 1.5rem 4rem; }
+      .writing-section { padding: 4rem 1.5rem 5rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════════ -->
+  <header class="writing-hero">
+    <div class="spray spray-red"></div>
+    <div class="spray spray-yel"></div>
+    <div class="writing-hero-inner">
+      <div class="stamp reveal">// medium.com/@jxdata</div>
+      <h1 class="section-title reveal">WRITING</h1>
+      <p class="hero-sub reveal">
+        Analysis, essays, and field notes. Published on
+        <a href="https://medium.com/@jxdata" target="_blank" rel="noopener">Medium</a>.
+        This page updates automatically when something new goes live.
+      </p>
+    </div>
+  </header>
+
+  <!-- ═══ ARTICLES ════════════════════════════════════════════════════ -->
+  <section class="writing-section">
+    <div>
+    <div class="writing-inner">
+
+      <div class="status-bar">
+        <span class="status-label">
+          <span class="status-dot"></span>
+          Live feed from Medium
+        </span>
+        <span class="status-label" id="article-count">Loading...</span>
+      </div>
+
+      <div class="cards-grid" id="cards-grid">
+        <!-- skeleton placeholders while fetching -->
+        <div class="skeleton-card reveal">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line mid"></div>
+            <div class="skeleton-line long"></div>
+          </div>
+        </div>
+        <div class="skeleton-card reveal">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line mid"></div>
+            <div class="skeleton-line long"></div>
+          </div>
+        </div>
+        <div class="skeleton-card reveal">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line mid"></div>
+            <div class="skeleton-line long"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- ═══ SCRIPTS ══════════════════════════════════════════════════════ -->
+  <script src="nav.js"></script>
+
+  <script>
+    /* ── REVEAL ON SCROLL ─────────────────────────────────── */
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── STRIP HTML TAGS (for excerpt cleanup) ────────────── */
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    /* ── FORMAT DATE ──────────────────────────────────────── */
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    /* ── BUILD ONE CARD ───────────────────────────────────── */
+    function buildCard(item) {
+      const card = document.createElement('a');
+      card.href        = item.link;
+      card.target      = '_blank';
+      card.rel         = 'noopener noreferrer';
+      card.className   = 'article-card reveal';
+
+      // thumbnail (Medium provides this in the feed)
+      const thumb = item.thumbnail || item.enclosure?.link || '';
+
+      const thumbHTML = thumb
+        ? `<img
+             class="card-thumb"
+             src="${thumb}"
+             alt="${item.title}"
+             loading="lazy"
+             onerror="this.dataset.missing='true'"
+           />`
+        : '';
+
+      // Clean the description to plain text for excerpt
+      const excerpt = stripHtml(item.description).slice(0, 200).trim();
+
+      card.innerHTML = `
+        ${thumbHTML}
+        <div class="card-body">
+          <span class="card-date">${formatDate(item.pubDate)}</span>
+          <h2 class="card-title">${item.title}</h2>
+          <p class="card-excerpt">${excerpt}…</p>
+          <span class="card-cta">Read on Medium ↗</span>
+        </div>
+      `;
+
+      return card;
+    }
+
+    /* ── FETCH FROM RSS2JSON ──────────────────────────────── */
+    async function loadArticles() {
+      const MEDIUM_USER  = '@jxdata';
+      const RSS_URL      = `https://medium.com/feed/${MEDIUM_USER}`;
+      const API_URL      = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+      const grid         = document.getElementById('cards-grid');
+      const countLabel   = document.getElementById('article-count');
+
+      try {
+        const res  = await fetch(API_URL);
+        const data = await res.json();
+
+        if (data.status !== 'ok' || !data.items?.length) {
+          throw new Error('Feed returned no items');
+        }
+
+        // Clear skeletons
+        grid.innerHTML = '';
+
+        data.items.forEach(item => {
+          const card = buildCard(item);
+          grid.appendChild(card);
+          // Kick off reveal observer for newly added cards
+          observer.observe(card);
+        });
+
+        countLabel.innerHTML = `<span>${data.items.length}</span> article${data.items.length !== 1 ? 's' : ''} published`;
+
+      } catch (err) {
+        // Clear skeletons and show error fallback
+        grid.innerHTML = `
+          <div class="error-state">
+            <p>Couldn't load the feed right now.</p>
+            <p style="margin-top:0.75rem">
+              Read everything directly on
+              <a href="https://medium.com/@jxdata" target="_blank" rel="noopener">Medium ↗</a>
+            </p>
+          </div>
+        `;
+        countLabel.textContent = '';
+        console.error('Medium RSS fetch error:', err);
+      }
+    }
+
+    loadArticles();
+  </script>
+
+</body>
+</html>

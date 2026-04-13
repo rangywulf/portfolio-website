@@ -6,20 +6,25 @@
   <title>Contact | Jessica Stubbs Data Analyst Portfolio</title>
   <link rel="stylesheet" href="styles.css"/>
   <style>
-    #contact{background:var(--black);padding-top:9rem;position:relative;overflow:hidden;}
-    #contact::before{content:'HIT ME';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-6deg);font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,16rem);color:transparent;-webkit-text-stroke:1px rgba(240,220,40,0.04);white-space:nowrap;pointer-events:none;letter-spacing:0.05em;}
-    .section-inner{max-width:700px;}
-    .contact-tagline{color:var(--bone);font-size:1rem;margin-bottom:2.5rem;line-height:1.7;}
-    .contact-links{display:flex;flex-direction:column;gap:0.7rem;}
-    .contact-link{display:flex;align-items:center;gap:1rem;text-decoration:none;font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:0.08em;color:var(--bone);padding:1rem 1.3rem;border:1px solid #2a2a2a;position:relative;overflow:hidden;transition:all 0.15s;}
-    .contact-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--yellow);transform:scaleY(0);transition:transform 0.2s;}
-    .contact-link:hover{border-color:var(--yellow);color:var(--yellow);background:rgba(240,220,40,0.03);}
-    .contact-link:hover::before{transform:scaleY(1);}
-    .contact-link-icon{font-size:0.85rem;font-family:'Space Mono',monospace;color:var(--muted);min-width:1.5rem;}
-    @media(max-width:768px){#contact{padding-top:7rem;}}
+    #contact { background: var(--black); padding-top: 9rem; position: relative; overflow: hidden; }
+    #contact::before { content: 'HIT ME UP'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-6deg); font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 14vw, 16rem); color: transparent; -webkit-text-stroke: 1px rgba(240,220,40,0.04); white-space: nowrap; pointer-events: none; letter-spacing: 0.05em; }
+    .section-inner { max-width: 700px; }
+    .page-sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.95rem;
+      color: var(--bone);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 0.7rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--bone); padding: 1rem 1.3rem; border: 1px solid #2a2a2a; position: relative; overflow: hidden; transition: all 0.15s; }
+    .contact-link::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--yellow); transform: scaleY(0); transition: transform 0.2s; }
+    .contact-link:hover { border-color: var(--yellow); color: var(--yellow); background: rgba(240,220,40,0.03); }
+    .contact-link:hover::before { transform: scaleY(1); }
+    .contact-link-icon { font-size: 0.85rem; font-family: 'Space Mono', monospace; color: var(--muted); min-width: 1.5rem; }
+    @media (max-width: 768px) { #contact { padding-top: 7rem; } }
   </style>
-    
-  <!-- Open Graph: controls how this page appears when shared on LinkedIn, Slack, etc. -->
   <meta property="og:type"        content="website"/>
   <meta property="og:url"         content="https://jxdata.me"/>
   <meta property="og:title"       content="Jessica Stubbs | Data Analyst Portfolio"/>
@@ -27,7 +32,6 @@
   <meta property="og:image"       content="https://jxdata.me/images/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height"content="630"/>
-  <!-- Twitter/X card -->
   <meta name="twitter:card"        content="summary_large_image"/>
   <meta name="twitter:title"       content="Jessica Stubbs | Data Analyst Portfolio"/>
   <meta name="twitter:description" content="8 years running e-commerce businesses taught me what data actually costs when you get it wrong. Now I have the technical skills to get it right."/>
@@ -39,11 +43,13 @@
   <script src="nav.js"></script>
 
   <section id="contact">
+    <div class="spray spray-red"></div>
+    <div class="spray spray-yel" style="top: 60px; right: 80px; bottom: auto; left: auto;"></div>
     <div class="section-inner">
       <div class="stamp">// Contact</div>
-      <h2 class="section-title">LET'S<br><span class="outline">TALK</span></h2>
+      <h2 class="section-title" style="margin-bottom: 1rem;">LET'S<br><span class="outline">TALK</span></h2>
+      <p class="page-sub">Open to data analyst roles, freelance projects, and collaborations with people building something interesting. Don't be a stranger.</p>
       <div class="reveal">
-        <p class="contact-tagline">Open to data analyst roles, freelance projects, and collaborations with people building something interesting. Don't be a stranger.</p>
         <div class="contact-links">
           <a href="#" id="email-link" class="contact-link">
             <span class="contact-link-icon">@</span>
@@ -70,7 +76,6 @@
     </div>
   </section>
 
-  <!-- Footer injected by nav.js into this placeholder -->
   <div id="footer-placeholder"></div>
 
   <script>
